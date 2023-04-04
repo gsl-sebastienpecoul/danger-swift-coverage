@@ -1,4 +1,4 @@
-// swift-tools-version:5.6
+// swift-tools-version:5.1
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -17,8 +17,8 @@ let package = Package(
         .package(url: "https://github.com/danger/swift.git", from: "3.0.0"),
         // Dev dependencies
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.35.8"), // dev
-        .package(url: "https://github.com/Realm/SwiftLint", exact: "0.28.1"), // dev
-        .package(url: "https://github.com/f-meloni/Rocket", from: "1.0.0"), // dev
+        .package(url: "https://github.com/Realm/SwiftLint", .exact("0.28.1")), // dev
+    //    .package(url: "https://github.com/f-meloni/Rocket", from: "1.0.0"), // dev
         .package(url: "https://github.com/orta/Komondor", from: "1.0.0"), // dev
         .package(url: "https://github.com/f-meloni/danger-swift-xcodesummary", from: "1.0.0"), // dev
     ],
