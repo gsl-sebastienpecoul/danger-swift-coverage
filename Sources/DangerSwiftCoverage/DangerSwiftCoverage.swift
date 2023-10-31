@@ -56,6 +56,9 @@ public enum Coverage {
     }
 
     private static func sendReport(_ report: Report, minumumCoverage: Float, danger: DangerDSL) {
+        
+        debugPrint("-- Report: \(report)")
+        
         report.messages.forEach { danger.message($0) }
 
         report.sections.forEach {
