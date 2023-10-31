@@ -27,7 +27,8 @@ public enum Coverage {
 
     static func xcodeBuildCoverage(_ coveragePathType: CoveragePathType, minimumCoverage: Float, excludedTargets: [ExcludedTarget], hideProjectCoverage: Bool = false, fileManager: FileManager, xcodeBuildCoverageParser: XcodeBuildCoverageParsing.Type, xcresultFinder: XcresultBundleFinding.Type, danger: DangerDSL) {
         let paths = modifiedFilesAbsolutePaths(fileManager: fileManager, danger: danger)
-
+        debugPrint("Modifier paths: \(paths)")
+        
         do {
             let xcresultBundlePath = try coveragePathType.xcresultBundlePath(xcresultFinder: xcresultFinder, fileManager: fileManager)
             let report = try xcodeBuildCoverageParser.coverage(xcresultBundlePath: xcresultBundlePath, files: paths, excludedTargets: excludedTargets, hideProjectCoverage: hideProjectCoverage)
