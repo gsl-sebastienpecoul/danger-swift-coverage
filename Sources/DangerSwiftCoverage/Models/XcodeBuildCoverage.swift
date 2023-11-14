@@ -6,9 +6,9 @@ struct XcodeBuildCoverage: Decodable, PercentageCoverage {
     let lineCoverage: Float
     let targets: [Target]
 
-    func filteringTargets(notOn files: [String], excludedTargets: [ExcludedTarget]) -> XcodeBuildCoverage {
+    func filteringTargets(notOn files: [String], excludedFiles: [ExcludedFile], excludedTargets: [ExcludedTarget]) -> XcodeBuildCoverage {
         let targets = self.targets
-            .map { $0.filteringFiles(notOn: files) }
+            .map { $0.filteringFiles(notOn: files, excludedFiles: excludedFiles) }
             .filter { target in
                 !target.files.isEmpty && !excludedTargets.contains {
                     $0.matches(string: target.name)
@@ -25,8 +25,12 @@ struct Target: Decodable, PercentageCoverage {
     let name: String
     let files: [File]
 
-    func filteringFiles(notOn files: [String]) -> Target {
-        let files = self.files.filter { files.contains($0.path) }
+    func filteringFiles(notOn files: [String], excludedFiles: [ExcludedFile]) -> Target {
+        let files = self.files.filter { file in
+            return files.contains(file.path) && !excludedFiles.contains {
+                $0.matches(string: file.name)
+            }
+        }
         return Target(coveredLines: coveredLines, executableLines: executableLines, lineCoverage: lineCoverage, name: name, files: files)
     }
 }

@@ -177,6 +177,7 @@ private final class MockXcodeBuildCoverageParser: XcodeBuildCoverageParsing {
     static var receivedFiles: [String]!
     static var receivedXcresultBundlePath: String!
     static var receivedExcludedTargets: [ExcludedTarget]!
+    static var receivedExcludedFiles: [ExcludedFile]!
 
     static var shouldSucceed = false
 
@@ -201,10 +202,11 @@ private final class MockXcodeBuildCoverageParser: XcodeBuildCoverageParsing {
                                        ]),
                                    ])
 
-    static func coverage(xcresultBundlePath: String, files: [String], excludedTargets: [ExcludedTarget], hideProjectCoverage _: Bool) throws -> Report {
+    static func coverage(xcresultBundlePath: String, files: [String], excludedFiles: [ExcludedFile], excludedTargets: [ExcludedTarget], hideProjectCoverage _: Bool) throws -> Report {
         receivedFiles = files
         receivedXcresultBundlePath = xcresultBundlePath
         receivedExcludedTargets = excludedTargets
+        receivedExcludedFiles = excludedFiles
 
         if shouldSucceed {
             return MockXcodeBuildCoverageParser.fakeReport
@@ -217,6 +219,7 @@ private final class MockXcodeBuildCoverageParser: XcodeBuildCoverageParsing {
         receivedXcresultBundlePath = nil
         receivedFiles = nil
         receivedExcludedTargets = nil
+        receivedExcludedFiles = nil
         shouldSucceed = false
     }
 }

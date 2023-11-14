@@ -4,6 +4,9 @@
 
 ![DangerSwiftCoverage](Images/DangerSwiftCoverage.png)
 
+## Note:
+This plugin is a fork used by Aviv iOS team, it extend the original plugin to support excluding of specific file name from the coverage calculation.
+
 ## Getting Started
 
 ### Install DangerSwiftCoverage

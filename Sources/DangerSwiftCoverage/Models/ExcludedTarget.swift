@@ -11,3 +11,6 @@ public enum ExcludedTarget: Equatable {
         }
     }
 }
+
+
+public typealias ExcludedFile = ExcludedTarget
